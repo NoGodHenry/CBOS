@@ -1,0 +1,34 @@
+#import "loader/common/loader"
+#import "loader/limine/kernel/src/limine_loader"
+#import "memory/common/paging/paging"
+#import "font/system_font/system_font"
+#import "logger/common/logger"
+#import "logger/direct_term/direct_term_logger"
+
+class System {
+  static loader: LimineLoader;
+  static paging: Paging;
+  static font: SystemFont;
+  static logger: DirectTerminalLogger;
+
+  static func init() -> void {
+    loader = new LimineLoader();
+    paging = new Paging();
+    font = new SystemFont();
+    logger = new DirectTerminalLogger();
+
+    loader.load();
+    paging.load();
+
+  }
+
+  static func post_init() -> void {
+    str: &byte[] = "Hello From Jesus!";
+    t: int = 0;
+    while (t < 10) {
+    value: int = str[t];
+    System.font.draw(System.loader.getFramebuffer(), 5 + t * 10, 5, value);
+    t = t + 1;
+    }
+  }
+}

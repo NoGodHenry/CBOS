@@ -1,0 +1,27 @@
+#import "memory/common/paging/page_table"
+#import "memory/common/paging/page_entry"
+#import "common/loadable"
+
+class Paging impl Loadable {
+  pml4: PageTable;
+  index: int;
+
+  mut virtual func load() -> void {
+  }
+
+  mut func map_page(physical_address: long, virtual_address: long) -> void {
+    pml4_index: long = (virtual_address >> 39) & 0x1FF;
+    pdp_index: long = (virtual_address >> 30) & 0x1FF;
+    pd_index: long = (virtual_address >> 21) & 0x1FF;
+    pt_index: long = (virtual_address >> 12) & 0x1FF;
+        
+  }
+
+  static func set_page_address(pointer: &PageTable) -> void {
+
+  }
+
+  static func flush_paging() -> void {
+
+  }
+}

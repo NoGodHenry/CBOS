@@ -1,0 +1,5 @@
+class MemMapTable {
+  base: long;
+  length: long;
+  type: long;
+}

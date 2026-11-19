@@ -1,0 +1,27 @@
+#import "loader/common/loader"
+#import "loader/common/framebuffer"
+#import "loader/limine/kernel/src/limine_framebuffer"
+#import "main"
+
+class LimineLoader impl Loader {
+  framebuffer: LimineFramebuffer;
+
+  mut virtual func load() -> void {
+
+  }
+  
+  static func load(array: &mut int[], width: int, height: int) -> void {
+    System.init();
+
+    System.loader.setFramebuffer(array, width, height);
+    System.post_init();
+  }
+
+  virtual mut func setFramebuffer(array: &mut int[], width: int, height: int) -> void {
+    this.framebuffer = new LimineFramebuffer(array, width, height);
+  }
+
+  virtual mut func getFramebuffer() -> &mut LoaderFramebuffer {
+    return &mut this.framebuffer;
+  }
+}

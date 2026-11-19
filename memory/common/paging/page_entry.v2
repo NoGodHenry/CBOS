@@ -1,0 +1,143 @@
+class PageEntry {
+  flags: long;
+
+  mut func set_flag(bit: int, value: bool) -> void {
+    bit_value: long = 0;
+    if (value) {
+      bit_value = 1;
+    }
+
+    this.set_field(bit, 1, bit_value);
+  }
+
+  mut func set_field(offset: int, width: int, value: long) -> void {
+    one: long = 1;
+    field_mask: long = (one << width) - one;
+    mask: long = field_mask << offset;
+    shifted_value: long = (value << offset) & mask;
+
+    this.flags = (this.flags & ~mask) | shifted_value;
+  }
+  
+  func get_flag(bit: int) -> bool {
+    return this.get_field(bit, 1) != 0;
+  }
+  
+  func get_field(offset: int, width: int) -> long {
+    one: long = 1;
+    field_mask: long = (one << width) - one;
+    return (this.flags >> offset) & field_mask;
+  }
+  
+  func present() -> bool {
+    return this.get_flag(0);
+  }
+  
+  func writable() -> bool {
+    return this.get_flag(1);
+  }
+  
+  func user_accessible() -> bool {
+    return this.get_flag(2);
+  }
+  
+  func write_through_caching() -> bool {
+    return this.get_flag(3);
+  }
+  
+  func disable_cache() -> bool {
+    return this.get_flag(4);
+  }
+  
+  func accessed() -> bool {
+    return this.get_flag(5);
+  }
+  
+  func dirty() -> bool {
+    return this.get_flag(6);
+  }
+  
+  func pat() -> bool {
+    return this.get_flag(7);
+  }
+  
+  func global() -> bool {
+    return this.get_flag(8);
+  }
+  
+  func available_low() -> long {
+    return this.get_field(9, 3);
+  }
+  
+  func physical_address() -> long {
+    return this.get_field(12, 40) << 12;
+  }
+  
+  func available_high() -> long {
+    return this.get_field(52, 7);
+  }
+  
+  func protection_key() -> long {
+    return this.get_field(59, 4);
+  }
+  
+  func no_execute() -> bool {
+    return this.get_flag(63);
+  }
+
+  mut func present(value: bool) -> void {
+    this.set_flag(0, value);
+  }
+
+  mut func writable(value: bool) -> void {
+    this.set_flag(1, value);
+  }
+
+  mut func user_accessible(value: bool) -> void {
+    this.set_flag(2, value);
+  }
+
+  mut func write_through_caching(value: bool) -> void {
+    this.set_flag(3, value);
+  }
+
+  mut func disable_cache(value: bool) -> void {
+    this.set_flag(4, value);
+  }
+
+  mut func accessed(value: bool) -> void {
+    this.set_flag(5, value);
+  }
+
+  mut func dirty(value: bool) -> void {
+    this.set_flag(6, value);
+  }
+
+  mut func pat(value: bool) -> void {
+    this.set_flag(7, value);
+  }
+
+  mut func global(value: bool) -> void {
+    this.set_flag(8, value);
+  }
+
+  mut func available_low(value: long) -> void {
+    this.set_field(9, 3, value);
+  }
+
+  mut func physical_address(value: long) -> void {
+    this.set_field(12, 40, value >> 12);
+  }
+
+  mut func available_high(value: long) -> void {
+    this.set_field(52, 7, value);
+  }
+
+  mut func protection_key(value: long) -> void {
+    this.set_field(59, 4, value);
+  }
+
+  mut func no_execute(value: bool) -> void {
+    this.set_flag(63, value);
+  }
+}

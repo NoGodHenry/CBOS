@@ -1,0 +1,31 @@
+#import "font/common/font"
+#import "main"
+
+class SystemFont impl Font {
+  static glyphs: &byte[4096];
+
+  static func populate_font(glyphs_: &byte[4096]) -> void {
+    glyphs = glyphs_;
+  }
+
+  virtual func draw(canvas: &mut Drawable, x: int, y: int, input: int) -> void {
+    offset_y: int = 0;
+
+    while (offset_y < 16) {
+      font_row_index: int = input * 16 + offset_y;
+      offset_x: int = 0;
+
+      while (offset_x < 8) {
+        bit_offset: int = 1 << (7 - offset_x);
+
+        if ((glyphs[font_row_index] & bit_offset) != 0) {
+          canvas.write(x + offset_x, y + offset_y, -1);
+        }
+
+        offset_x = offset_x + 1;
+      }
+
+      offset_y = offset_y + 1;
+    }
+  }
+}

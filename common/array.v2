@@ -1,0 +1,23 @@
+class Array<P> {
+  size: P[];
+  data: int;
+
+  new(size: P[], data: int) {
+    this.size = size;
+    this.data = data;
+  }
+
+  func as_view() -> ArrayView<P> {
+    return new ArrayView<P>(&this.data, this.size);
+  }
+}
+
+class ArrayView<P> {
+  data: &P[];
+  size: int;
+
+  new(data: &P[], size: int) {
+    this.data = data;
+    this.size = size;
+  }
+}

@@ -1,0 +1,3 @@
+interface Loadable {
+  mut virtual func load() -> void;
+}

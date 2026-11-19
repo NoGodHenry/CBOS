@@ -1,0 +1,18 @@
+#import "memory/common/paging/page_entry"
+
+class PageTable {
+  entries: PageEntry[256];
+
+  new() {
+    i: int = 0;
+    while (i < 256) {
+      entries[i].flags = 0;
+      i = i + 1;
+    }
+  }
+
+  func get_page_entry(index: int) -> &mut PageEntry {
+    return &mut this.entries[index];
+  }
+}
+

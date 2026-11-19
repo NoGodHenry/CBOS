@@ -1,0 +1,5 @@
+#import "common/drawable"
+
+interface LoaderFramebuffer extends Drawable {
+
+}

@@ -1,0 +1,5 @@
+#import "common/drawable"
+
+interface Font {
+    virtual func draw(canvas: &mut Drawable, x: int, y: int, input: int) -> void;
+}

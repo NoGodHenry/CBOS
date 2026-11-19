@@ -1,0 +1,8 @@
+#import "loader/common/framebuffer"
+#import "common/loadable"
+
+interface Loader extends Loadable {
+  mut virtual func setFramebuffer(array: &mut int[], width: int, height: int) -> void;
+
+  mut virtual func getFramebuffer() -> &mut LoaderFramebuffer;
+}
