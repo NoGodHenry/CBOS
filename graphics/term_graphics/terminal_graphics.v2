@@ -1,0 +1,17 @@
+#import "graphics/common/graphics"
+#import "graphics/common/canvas"
+#import "graphics/term/terminal"
+
+class TerminalGraphics impl Graphics {
+  terminal: Terminal;
+  canvas: Canvas;
+
+  mut virtual func load() -> void {
+    this.canvas = new Canvas(&mut System.font, System.loader.get_framebuffer());
+    this.terminal = new Terminal(16, &mut this.canvas);
+  }
+
+  mut virtual func get_terminal() -> &mut TerminalLike {
+    return &mut this.terminal;
+  }
+}

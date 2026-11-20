@@ -31,6 +31,7 @@ static void hcf(void) {
 }
 
 void LimineLoader_load_static(void*, int, int);
+void LimineLoader_post_init_static(void);
 void SystemFont_populate_font_static(const char*);
 
 extern const char fontdata_8x16[4096];
@@ -58,6 +59,8 @@ void kmain(void) {
 
         LimineLoader_load_static(framebuffer->address, framebuffer->width, framebuffer->height);
     }
+
+    LimineLoader_post_init_static();
 
     hcf();
 }

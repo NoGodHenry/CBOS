@@ -1,9 +1,10 @@
 #import "common/array"
+#import "common/string"
 
 interface Logger {
-  virtual func log(str: &byte[], len: int) -> void;
+  virtual func log(str: String) -> void;
 
-  func log(view: &ArrayView<byte>) -> void {
-    this.log(view.data, view.size);
+  func log(str: &byte[], len: int) -> void {
+    this.log(String.from(str, len));
   }
 }

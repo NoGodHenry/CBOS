@@ -1,6 +1,8 @@
 #import "loader/common/loader"
 #import "loader/limine/kernel/src/limine_loader"
 #import "memory/common/paging/paging"
+#import "graphics/term/terminal"
+#import "graphics/term_graphics/terminal_graphics"
 #import "font/system_font/system_font"
 #import "logger/common/logger"
 #import "logger/direct_term/direct_term_logger"
@@ -10,6 +12,7 @@ class System {
   static paging: Paging;
   static font: SystemFont;
   static logger: DirectTerminalLogger;
+  static graphics: TerminalGraphics;
 
   static func init() -> void {
     loader = new LimineLoader();
@@ -17,18 +20,21 @@ class System {
     font = new SystemFont();
     logger = new DirectTerminalLogger();
 
+    graphics = new TerminalGraphics();
+
     loader.load();
     paging.load();
+    graphics.load();
 
   }
 
   static func post_init() -> void {
     str: &byte[] = "Hello From Jesus!";
-    t: int = 0;
-    while (t < 10) {
-    value: int = str[t];
-    System.font.draw(System.loader.getFramebuffer(), 5 + t * 10, 5, value);
-    t = t + 1;
-    }
+    graphics.get_terminal().append(String.from(str, 10));
+    graphics.get_terminal().append(String.from(str, 10));
+    graphics.get_terminal().append(String.from(str, 10));
+    graphics.get_terminal().append(String.from(str, 10));
+    graphics.get_terminal().append(String.from(str, 10));
+    graphics.get_terminal().append(String.from(str, 10));
   }
 }

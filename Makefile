@@ -1,11 +1,6 @@
 .SUFFIXES:
 .DELETE_ON_ERROR:
 
-# --- V2 compiler -------------------------------------------------------------
-JAVA   ?= $(HOME)/.jdks/openjdk-27.0.1.0.2/bin/java
-V2_JAR ?= $(HOME)/IdeaProjects/V2/cli/build/libs/cli-0.0.0-all.jar
-V2C    ?= $(JAVA) -jar $(V2_JAR)
-
 V2_WORKSPACE ?= .
 V2_ENTRY     ?= main.v2
 

@@ -13,15 +13,18 @@ class LimineLoader impl Loader {
   static func load(array: &mut int[], width: int, height: int) -> void {
     System.init();
 
-    System.loader.setFramebuffer(array, width, height);
+    System.loader.set_framebuffer(array, width, height);
+  }
+
+  static func post_init() -> void {
     System.post_init();
   }
 
-  virtual mut func setFramebuffer(array: &mut int[], width: int, height: int) -> void {
+  mut func set_framebuffer(array: &mut int[], width: int, height: int) -> void {
     this.framebuffer = new LimineFramebuffer(array, width, height);
   }
 
-  virtual mut func getFramebuffer() -> &mut LoaderFramebuffer {
+  virtual mut func get_framebuffer() -> &mut LoaderFramebuffer {
     return &mut this.framebuffer;
   }
 }

@@ -1,2 +1,25 @@
+#import "common/drawable"
+#import "common/string"
+#import "common/text_canvas"
+
 class Terminal {
+  lineCount: int;
+  canvas: &mut TextCanvas;
+
+  index: int;
+
+  new(lineCount: int, canvas: &mut TextCanvas) {
+    this.lineCount = lineCount;
+    this.canvas = canvas;
+
+    this.index = 0;
+  }
+
+  mut virtual func append(str: String) -> void {
+    canvas.draw_text(0, this.index * 16, str);
+    this.index = this.index + 1;
+    if (this.index >= this.lineCount) {
+      this.index = 0;
+    }
+  }
 }

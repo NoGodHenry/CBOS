@@ -1,0 +1,23 @@
+#import "common/text_canvas"
+#import "font/common/font"
+#import "common/string"
+
+class Canvas impl TextCanvas {
+  font: &Font;
+  drawable: &mut Drawable;
+
+  new(font: &Font, drawable: &mut Drawable) {
+    this.font = font;
+    this.drawable = drawable;
+  }
+
+  virtual mut func draw_text(x: int, y: int, str: String) -> void {
+    index: int = 0;
+    while (index < str.size) {
+
+      font.draw(drawable, x + index * 10, y, str.get_at(index));
+
+      index = index + 1;
+    }
+  }
+}

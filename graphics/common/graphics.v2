@@ -1,0 +1,6 @@
+#import "common/loadable"
+#import "graphics/common/terminal_like"
+
+interface Graphics extends Loadable {
+  mut virtual func get_terminal() -> &mut TerminalLike;
+}

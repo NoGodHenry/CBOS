@@ -1,0 +1,5 @@
+#import "common/string"
+
+interface TerminalLike {
+  mut virtual func append(str: String) -> void;
+}

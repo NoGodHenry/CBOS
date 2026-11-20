@@ -1,7 +1,8 @@
 #import "logger/common/logger"
+#import "common/string"
 
 class DirectTerminalLogger impl Logger {
-  virtual func log(str: &byte[], len: int) -> void {
+  virtual func log(str: String) -> void {
 
   }
 }

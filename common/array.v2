@@ -20,4 +20,11 @@ class ArrayView<P> {
     this.data = data;
     this.size = size;
   }
+
+  func get_at(index: int) -> P {
+    if (index < 0 || index > size)
+      return data[0];
+
+    return data[index];
+  }
 }

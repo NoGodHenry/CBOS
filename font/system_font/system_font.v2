@@ -8,7 +8,7 @@ class SystemFont impl Font {
     glyphs = glyphs_;
   }
 
-  virtual func draw(canvas: &mut Drawable, x: int, y: int, input: int) -> void {
+  virtual func draw(canvas: &mut Drawable, x: int, y: int, input: byte) -> void {
     offset_y: int = 0;
 
     while (offset_y < 16) {

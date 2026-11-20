@@ -1,0 +1,12 @@
+#import "common/array"
+
+class String extends ArrayView<byte> {
+  new(data: &byte[], size: int) {
+    this.data = data;
+    this.size = size;
+  }
+
+  static func from(data: &byte[], len: int) -> String {
+    return new String(data, len);
+  }
+}

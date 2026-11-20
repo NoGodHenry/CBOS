@@ -1,0 +1,5 @@
+#import "common/string"
+
+interface TextCanvas {
+  mut virtual func draw_text(x: int, y: int, str: String) -> void;
+}

@@ -1,0 +1,8 @@
+class Optional<P> {
+  present: bool;
+  value: P;
+
+  func is_present() -> bool {
+    return present;
+  }
+}
