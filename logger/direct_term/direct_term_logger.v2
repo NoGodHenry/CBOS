@@ -3,6 +3,6 @@
 
 class DirectTerminalLogger impl Logger {
   virtual func log(str: String) -> void {
-
+    System.graphics.get_terminal().append(str);
   }
 }

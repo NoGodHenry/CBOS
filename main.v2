@@ -30,11 +30,11 @@ class System {
 
   static func post_init() -> void {
     str: &byte[] = "Hello From Jesus!";
-    graphics.get_terminal().append(String.from(str, 10));
-    graphics.get_terminal().append(String.from(str, 10));
-    graphics.get_terminal().append(String.from(str, 10));
-    graphics.get_terminal().append(String.from(str, 10));
-    graphics.get_terminal().append(String.from(str, 10));
-    graphics.get_terminal().append(String.from(str, 10));
+    logger.log(String.from(str, 10));
+    logger.log(String.from(str, 10));
+    logger.log(String.from(str, 10));
+    logger.log(String.from(str, 10));
+    logger.log(String.from(str, 10));
+    logger.log(String.from(str, 10));
   }
 }
