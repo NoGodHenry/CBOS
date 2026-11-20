@@ -16,7 +16,7 @@ class Terminal {
   }
 
   mut virtual func append(str: String) -> void {
-    canvas.draw_text(0, this.index * 16, str);
+    canvas.draw_text(0, this.index, str);
     this.index = this.index + 1;
     if (this.index >= this.lineCount) {
       this.index = 0;

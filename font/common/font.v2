@@ -2,4 +2,6 @@
 
 interface Font {
     virtual func draw(canvas: &mut Drawable, x: int, y: int, input: byte) -> void;
+    virtual func character_spacing() -> int;
+    virtual func character_height() -> int;
 }

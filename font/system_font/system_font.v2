@@ -28,4 +28,12 @@ class SystemFont impl Font {
       offset_y = offset_y + 1;
     }
   }
+
+  virtual func character_spacing() -> int {
+    return 10;
+  }
+
+  virtual func character_height() -> int {
+    return 16;
+  }
 }

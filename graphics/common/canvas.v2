@@ -15,7 +15,7 @@ class Canvas impl TextCanvas {
     index: int = 0;
     while (index < str.size) {
 
-      font.draw(drawable, x + index * 10, y, str.get_at(index));
+      font.draw(drawable, x + index * font.character_spacing(), y * font.character_height(), str.get_at(index));
 
       index = index + 1;
     }
