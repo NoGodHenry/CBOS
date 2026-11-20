@@ -29,7 +29,7 @@ class System {
   }
 
   static func post_init() -> void {
-    str: &byte[] = "Hello From Jesus!";
+    str: &byte[] = "Hello From!";
     logger.log(String.from(str, 10));
     logger.log(String.from(str, 10));
     logger.log(String.from(str, 10));
