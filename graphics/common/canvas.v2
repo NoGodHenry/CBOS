@@ -11,7 +11,7 @@ class Canvas impl TextCanvas {
     this.drawable = drawable;
   }
 
-  virtual mut func draw_text(x: int, y: int, str: String) -> void {
+  mut virtual func draw_text(x: int, y: int, str: String) -> void {
     index: int = 0;
     while (index < str.size) {
 

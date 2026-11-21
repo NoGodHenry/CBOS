@@ -1,6 +1,9 @@
 #import "loader/common/framebuffer"
+#import "loader/common/memmap_table"
+#import "loader/common/memmap_entry"
 #import "common/loadable"
 
 interface Loader extends Loadable {
   mut virtual func get_framebuffer() -> &mut LoaderFramebuffer;
+  mut virtual func get_memory_map() -> &mut MemoryMapTable;
 }

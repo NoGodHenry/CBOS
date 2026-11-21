@@ -64,6 +64,9 @@ void kmain(void) {
         LimineLoader_set_static_framebuffer_static(framebuffer->address, framebuffer->width, framebuffer->height);
     }
 
+    if (memmap_request.response->entry_count == 0)
+      hcf();
+
     LimineLoader_set_static_memory_map_static(memmap_request.response->entries, memmap_request.response->entry_count);
 
     LimineLoader_post_init_static();

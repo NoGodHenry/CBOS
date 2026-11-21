@@ -28,17 +28,16 @@ class System {
   }
 
   static func post_init() -> void {
-    str: &byte[] = "Hello From!";
-    setr: &byte[] = "Hello FromBlal!";
-    satr: &byte[] = "wrijoewoiefoije";
     count: int = 0;
-    // Test comment
-    while (count < 457) { // Hello
-      logger.log(String.from(str, 10));
-      logger.log(String.from(setr, 10));
-      logger.log(String.from(satr, 10));
+
+    view: ArrayView<&MemoryMapEntry> = loader.get_memory_map().entries;
+
+    while (count < view.size) {
+      logger.log(String.from("AAAAAAAAAAAAAAA", count));
 
       count = count + 1;
     }
+
+    logger.log(String.from("Fentry", 10));
   }
 }

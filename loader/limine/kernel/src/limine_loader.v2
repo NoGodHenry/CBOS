@@ -34,10 +34,14 @@ class LimineLoader impl Loader {
   }
 
   mut func set_memory_map(entries: &MemoryMapEntry&[], entries_size: int) -> void {
-    this.memory_map = new MemoryMapTable(new ArrayView<&MemoryMapEntry>(entries_size, entries));
+    this.memory_map = new MemoryMapTable(new ArrayView<&MemoryMapEntry>(entries, entries_size));
   }
 
-  virtual mut func get_framebuffer() -> &mut LoaderFramebuffer {
+  mut virtual func get_memory_map() -> &mut MemoryMapTable {
+    return &mut this.memory_map;
+  }
+
+  mut virtual func get_framebuffer() -> &mut LoaderFramebuffer {
     return &mut this.framebuffer;
   }
 }

@@ -2,6 +2,9 @@
 #import "common/array"
 
 class MemoryMapTable {
-  entries_size: int;
-  entries: ArrayView<&MemMapEntry>;
+  entries: ArrayView<&MemoryMapEntry>;
+
+  new(entries: ArrayView<&MemoryMapEntry>) {
+    this.entries = entries;
+  }
 }
