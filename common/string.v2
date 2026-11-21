@@ -9,4 +9,17 @@ class String extends ArrayView<byte> {
   static func from(data: &byte[], len: int) -> String {
     return new String(data, len);
   }
+
+  static func from_null_terminated(data: &byte[]) -> String {
+    return new String(data, strlen_null_terminated(data));
+  }
+
+  static func strlen_null_terminated(data: &byte[]) -> int {
+    len: int = 0;
+    while (data[len] != 0) {
+      len = len + 1;
+    }
+
+    return len;
+  }
 }

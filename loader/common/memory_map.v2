@@ -1,0 +1,25 @@
+#import "common/array"
+
+class MemoryMapTable {
+  entries: ArrayView<&MemoryMapEntry>;
+
+  new(entries: ArrayView<&MemoryMapEntry>) {
+    this.entries = entries;
+  }
+
+  mut virtual func get_memory_entry_type(entry: &MemoryMapEntry) -> &byte[] {
+    return "not used";
+  }
+}
+
+class MemoryMapEntry {
+  base: long;
+  length: long;
+  type: long;
+
+  new(base: long, length: long, type: long) {
+    this.base = base;
+    this.length = length;
+    this.type = type;
+  }
+}

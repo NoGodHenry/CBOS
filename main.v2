@@ -32,8 +32,14 @@ class System {
 
     view: ArrayView<&MemoryMapEntry> = loader.get_memory_map().entries;
 
+    data: byte[5] = new byte[5]();
+
     while (count < view.size) {
-      logger.log(String.from("AAAAAAAAAAAAAAA", count));
+      logger.log_null_terminated(
+        loader.get_memory_map().get_memory_entry_type(
+           view.get_at(count)
+        )
+      );
 
       count = count + 1;
     }

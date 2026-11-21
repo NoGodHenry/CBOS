@@ -1,0 +1,37 @@
+#import "loader/common/memory_map"
+
+class LimineMemoryMapTable extends MemoryMapTable {
+  new(entries: ArrayView<&MemoryMapEntry>) {
+    this.entries = entries;
+  }
+
+  mut virtual func get_memory_entry_type(entry: &MemoryMapEntry) -> &byte[] {
+    type: long = entry.type;
+    if (type == 0) {
+      return "Usable RAM";
+    }
+    if (type == 1) {
+      return "Reserved";
+    }
+    if (type == 2) {
+      return "ACPI reclaimable";
+    }
+    if (type == 3) {
+      return "ACPI NVS";
+    }
+    if (type == 4) {
+      return "Bad memory";
+    }
+    if (type == 5) {
+      return "Bootloader reclaimable";
+    }
+    if (type == 6) {
+      return "Kernel/Modules";
+    }
+    if (type == 7) {
+      return "Framebuffer";
+    }
+
+    return "???";
+  }
+}

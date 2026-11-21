@@ -1,6 +1,5 @@
 #import "loader/common/framebuffer"
-#import "loader/common/memmap_table"
-#import "loader/common/memmap_entry"
+#import "loader/common/memory_map"
 #import "common/loadable"
 
 interface Loader extends Loadable {
