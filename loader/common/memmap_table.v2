@@ -1,5 +1,7 @@
-class MemMapTable {
-  base: long;
-  length: long;
-  type: long;
+#import "loader/common/memmap_table"
+#import "common/array"
+
+class MemoryMapTable {
+  entries_size: int;
+  entries: ArrayView<&MemMapEntry>;
 }

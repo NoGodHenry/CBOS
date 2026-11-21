@@ -30,8 +30,10 @@ static void hcf(void) {
     }
 }
 
-void LimineLoader_load_static(void*, int, int);
+void LimineLoader_static_load_static(void);
 void LimineLoader_post_init_static(void);
+void LimineLoader_set_static_framebuffer_static(void*, int, int);
+void LimineLoader_set_static_memory_map_static(void*, int);
 void SystemFont_populate_font_static(const char*);
 
 extern const char fontdata_8x16[4096];
@@ -50,6 +52,8 @@ void kmain(void) {
 
     SystemFont_populate_font_static(fontdata_8x16);
 
+    LimineLoader_static_load_static();
+
     for (uint64_t i = 0; i < framebuffer_request.response->framebuffer_count; i++) {
         struct limine_framebuffer *framebuffer = framebuffer_request.response->framebuffers[i];
 
@@ -57,8 +61,10 @@ void kmain(void) {
             hcf();
         }
 
-        LimineLoader_load_static(framebuffer->address, framebuffer->width, framebuffer->height);
+        LimineLoader_set_static_framebuffer_static(framebuffer->address, framebuffer->width, framebuffer->height);
     }
+
+    LimineLoader_set_static_memory_map_static(memmap_request.response->entries, memmap_request.response->entry_count);
 
     LimineLoader_post_init_static();
 

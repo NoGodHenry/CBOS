@@ -1,19 +1,28 @@
 #import "loader/common/loader"
 #import "loader/common/framebuffer"
+#import "loader/common/memmap_table"
+#import "loader/common/memmap_entry"
 #import "loader/limine/kernel/src/limine_framebuffer"
 #import "main"
 
 class LimineLoader impl Loader {
   framebuffer: LimineFramebuffer;
+  memory_map: MemoryMapTable;
 
   mut virtual func load() -> void {
 
   }
   
-  static func load(array: &mut int[], width: int, height: int) -> void {
+  static func static_load() -> void {
     System.init();
+  }
 
+  static func set_static_framebuffer(array: &mut int[], width: int, height: int) -> void {
     System.loader.set_framebuffer(array, width, height);
+  }
+
+  static func set_static_memory_map(entries: &MemoryMapEntry&[], entries_size: int) -> void {
+    System.loader.set_memory_map(entries, entries_size);
   }
 
   static func post_init() -> void {
@@ -22,6 +31,10 @@ class LimineLoader impl Loader {
 
   mut func set_framebuffer(array: &mut int[], width: int, height: int) -> void {
     this.framebuffer = new LimineFramebuffer(array, width, height);
+  }
+
+  mut func set_memory_map(entries: &MemoryMapEntry&[], entries_size: int) -> void {
+    this.memory_map = new MemoryMapTable(new ArrayView<&MemoryMapEntry>(entries_size, entries));
   }
 
   virtual mut func get_framebuffer() -> &mut LoaderFramebuffer {

@@ -1,0 +1,5 @@
+class MemoryMapEntry {
+  base: long;
+  length: long;
+  type: long;
+}
