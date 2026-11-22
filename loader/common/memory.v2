@@ -1,8 +1,0 @@
-class Memory {
-  start: &byte[];
-  end: &byte[];
-}
-
-interface LoaderMemory {
-  func memoryLayout() -> Memory;
-}

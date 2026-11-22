@@ -38,11 +38,11 @@ void SystemFont_populate_font_static_1(const char*);
 
 extern const char fontdata_8x16[4096];
 
-void LimineLoader_halt_program_0() {
+extern void LimineLoader_halt_program_static_0() {
     hcf();
 }
 
-void Paging_set_page_address_static_1(void *address) {
+extern void Paging_set_page_address_static_1(void *address) {
     __asm__ volatile (
         "mov %0, %%cr3"
         :
@@ -60,8 +60,6 @@ void kmain(void) {
      || framebuffer_request.response->framebuffer_count < 1) {
         hcf();
     }
-
-    char data[120];
 
     SystemFont_populate_font_static_1(fontdata_8x16);
 

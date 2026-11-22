@@ -4,9 +4,11 @@
 
 class BumpPhysicalMemoryManager impl PhysicalMemoryManager, Loadable {
   offset: int;
+  length: int;
 
   new() {
     offset = 0;
+    length = 0;
   }
 
   mut virtual func load() -> void {
@@ -14,10 +16,11 @@ class BumpPhysicalMemoryManager impl PhysicalMemoryManager, Loadable {
     usableMemory: Optional<&MemoryMapEntry> = table.get_usable_memory();
     if (!usableMemory.is_present()) {
       System.panic("No usable memory found!");
-    } else {
-      System.panic("Usable memory was found!");
+      return;
     }
 
+    this.length = usableMemory.get_value().length;
+    this.offset = usableMemory.get_value().offset;
   }
 
   virtual func alloc_aligned(alightment: int) -> &mut AllocationBlock {

@@ -30,7 +30,7 @@ class LimineLoader impl Loader {
   }
 
   virtual func halt() -> void {
-
+    halt_program();
   }
 
   mut func set_framebuffer(array: &mut int[], width: int, height: int) -> void {

@@ -15,6 +15,7 @@ class MemoryMapTable {
   func get_usable_memory() -> Optional<&MemoryMapEntry> {
     index: int = 0;
     while (index < entries.size) {
+      System.logger.log_null_terminated(get_memory_entry_type(entries.get_at(index)));
       if (is_usable_memory(entries.get_at(index))) {
         return new Optional<&MemoryMapEntry>(entries.get_at(index));
       }
