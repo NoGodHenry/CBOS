@@ -5,4 +5,5 @@
 interface Loader extends Loadable {
   mut virtual func get_framebuffer() -> &mut LoaderFramebuffer;
   mut virtual func get_memory_map() -> &mut MemoryMapTable;
+  virtual func halt() -> void;
 }

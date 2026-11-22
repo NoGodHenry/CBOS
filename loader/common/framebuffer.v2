@@ -1,5 +1,6 @@
 #import "common/drawable"
 
 interface LoaderFramebuffer extends Drawable {
-
+  mut virtual func get_height() -> int;
+  virtual func get_width() -> int;
 }

@@ -7,8 +7,10 @@ class TerminalGraphics impl Graphics {
   canvas: Canvas;
 
   mut virtual func load() -> void {
-    this.canvas = new Canvas(&mut System.font, System.loader.get_framebuffer());
-    this.terminal = new Terminal(16, &mut this.canvas);
+    framebuffer: &mut LoaderFramebuffer = System.loader.get_framebuffer();
+
+    this.canvas = new Canvas(&mut System.font, framebuffer);
+    this.terminal = new Terminal(framebuffer.get_height() / System.font.character_height(), &mut this.canvas);
   }
 
   mut virtual func get_terminal() -> &mut TerminalLike {

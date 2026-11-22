@@ -1,0 +1,27 @@
+#import "memory/pmm/common/pmm"
+#import "common/optional"
+#import "main"
+
+class BumpPhysicalMemoryManager impl PhysicalMemoryManager, Loadable {
+  offset: int;
+
+  new() {
+    offset = 0;
+  }
+
+  mut virtual func load() -> void {
+    table: &mut MemoryMapTable = System.loader.get_memory_map();
+    usableMemory: Optional<&MemoryMapEntry> = table.get_usable_memory();
+    if (!usableMemory.is_present()) {
+      System.panic("No usable memory found!");
+    } else {
+      System.panic("Usable memory was found!");
+    }
+
+  }
+
+  virtual func alloc_aligned(alightment: int) -> &mut AllocationBlock {
+    t: AllocationBlock = new AllocationBlock();
+    return &mut t;
+  }
+}

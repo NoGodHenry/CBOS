@@ -1,5 +1,5 @@
-#import "memory/common/paging/page_table"
-#import "memory/common/paging/page_entry"
+#import "memory/paging/common/page_table"
+#import "memory/paging/common/page_entry"
 #import "common/loadable"
 
 class Paging impl Loadable {
@@ -17,11 +17,7 @@ class Paging impl Loadable {
         
   }
 
-  static func set_page_address(pointer: &PageTable) -> void {
+  static native func set_page_address(pointer: &PageTable) -> void;
 
-  }
-
-  static func flush_paging() -> void {
-
-  }
+  static native func flush_paging() -> void;
 }

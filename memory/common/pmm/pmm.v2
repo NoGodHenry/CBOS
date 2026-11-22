@@ -1,4 +1,0 @@
-#import "memory/common/paging/page_table"
-interface PhysicalMemoryManager {
-  virtual func alloc_page_aligned() -> PageTable;
-}

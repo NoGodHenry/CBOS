@@ -1,11 +1,13 @@
 #import "loader/common/loader"
 #import "loader/limine/kernel/src/limine_loader"
-#import "memory/common/paging/paging"
+#import "common/optional"
+#import "memory/paging/common/paging"
 #import "graphics/term/terminal"
 #import "graphics/term_graphics/terminal_graphics"
 #import "font/system_font/system_font"
 #import "logger/common/logger"
 #import "logger/direct_term/direct_term_logger"
+#import "memory/pmm/bump/bump_pmm"
 
 class System {
   static loader: LimineLoader;
@@ -13,21 +15,24 @@ class System {
   static font: SystemFont;
   static logger: DirectTerminalLogger;
   static graphics: TerminalGraphics;
+  static pmm: BumpPhysicalMemoryManager;
 
   static func init() -> void {
     loader = new LimineLoader();
     paging = new Paging();
     font = new SystemFont();
     logger = new DirectTerminalLogger();
-
     graphics = new TerminalGraphics();
+    pmm = new BumpPhysicalMemoryManager();
 
     loader.load();
-    paging.load();
-    graphics.load();
   }
 
   static func post_init() -> void {
+    graphics.load();
+    paging.load();
+    pmm.load();
+
     count: int = 0;
 
     view: ArrayView<&MemoryMapEntry> = loader.get_memory_map().entries;
@@ -44,6 +49,23 @@ class System {
       count = count + 1;
     }
 
-    logger.log(String.from("Fentry", 10));
+    logger.log_null_terminated("hey");
+  }
+
+  static func panic(reason: &byte[]) -> void {
+    panic_optional(new Optional<&byte[]>(reason));
+  }
+
+  static func panic() -> void {
+    panic_optional(new Optional<&byte[]>());
+  }
+
+  static func panic_optional(reason: Optional<&byte[]>) -> void {
+    // TODO: This is potentially unsafe
+    if (reason.is_present()) {
+      logger.log_null_terminated(reason.get_value());
+    }
+
+    loader.halt();
   }
 }

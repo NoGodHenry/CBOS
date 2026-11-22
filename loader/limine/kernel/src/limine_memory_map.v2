@@ -5,6 +5,10 @@ class LimineMemoryMapTable extends MemoryMapTable {
     this.entries = entries;
   }
 
+  virtual func is_usable_memory(entry: &MemoryMapEntry) -> bool {
+    return entry.type == 0;
+  }
+
   mut virtual func get_memory_entry_type(entry: &MemoryMapEntry) -> &byte[] {
     type: long = entry.type;
     if (type == 0) {

@@ -29,6 +29,10 @@ class LimineLoader impl Loader {
     System.post_init();
   }
 
+  virtual func halt() -> void {
+
+  }
+
   mut func set_framebuffer(array: &mut int[], width: int, height: int) -> void {
     this.framebuffer = new LimineFramebuffer(array, width, height);
   }
@@ -44,4 +48,6 @@ class LimineLoader impl Loader {
   mut virtual func get_framebuffer() -> &mut LoaderFramebuffer {
     return &mut this.framebuffer;
   }
+
+  static native func halt_program() -> void;
 }

@@ -20,4 +20,12 @@ class LimineFramebuffer impl LoaderFramebuffer {
 
     this.array[x + this.width * y] = value;
   }
+
+  mut virtual func get_height() -> int {
+    return this.height;
+  }
+
+  virtual func get_width() -> int {
+    return this.width;
+  }
 }

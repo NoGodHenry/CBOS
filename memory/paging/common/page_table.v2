@@ -1,4 +1,4 @@
-#import "memory/common/paging/page_entry"
+#import "memory/paging/common/page_entry"
 
 class PageTable {
   entries: PageEntry[256];

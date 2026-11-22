@@ -30,13 +30,26 @@ static void hcf(void) {
     }
 }
 
-void LimineLoader_static_load_static(void);
-void LimineLoader_post_init_static(void);
-void LimineLoader_set_static_framebuffer_static(void*, int, int);
-void LimineLoader_set_static_memory_map_static(void*, int);
-void SystemFont_populate_font_static(const char*);
+void LimineLoader_static_load_static_0(void);
+void LimineLoader_post_init_static_0(void);
+void LimineLoader_set_static_framebuffer_static_3(void*, int, int);
+void LimineLoader_set_static_memory_map_static_2(void*, int);
+void SystemFont_populate_font_static_1(const char*);
 
 extern const char fontdata_8x16[4096];
+
+void LimineLoader_halt_program_0() {
+    hcf();
+}
+
+void Paging_set_page_address_static_1(void *address) {
+    __asm__ volatile (
+        "mov %0, %%cr3"
+        :
+        : "r"((uintptr_t)address)
+        : "memory"
+    );
+}
 
 void kmain(void) {
     if (LIMINE_BASE_REVISION_SUPPORTED(limine_base_revision) == false) {
@@ -50,9 +63,9 @@ void kmain(void) {
 
     char data[120];
 
-    SystemFont_populate_font_static(fontdata_8x16);
+    SystemFont_populate_font_static_1(fontdata_8x16);
 
-    LimineLoader_static_load_static();
+    LimineLoader_static_load_static_0();
 
     for (uint64_t i = 0; i < framebuffer_request.response->framebuffer_count; i++) {
         struct limine_framebuffer *framebuffer = framebuffer_request.response->framebuffers[i];
@@ -61,15 +74,15 @@ void kmain(void) {
             hcf();
         }
 
-        LimineLoader_set_static_framebuffer_static(framebuffer->address, framebuffer->width, framebuffer->height);
+        LimineLoader_set_static_framebuffer_static_3(framebuffer->address, framebuffer->width, framebuffer->height);
     }
 
     if (memmap_request.response->entry_count == 0)
       hcf();
 
-    LimineLoader_set_static_memory_map_static(memmap_request.response->entries, memmap_request.response->entry_count);
+    LimineLoader_set_static_memory_map_static_2(memmap_request.response->entries, memmap_request.response->entry_count);
 
-    LimineLoader_post_init_static();
+    LimineLoader_post_init_static_0();
 
     hcf();
 }

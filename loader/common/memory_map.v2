@@ -1,10 +1,28 @@
 #import "common/array"
+#import "common/optional"
 
 class MemoryMapTable {
   entries: ArrayView<&MemoryMapEntry>;
 
   new(entries: ArrayView<&MemoryMapEntry>) {
     this.entries = entries;
+  }
+
+  virtual func is_usable_memory(entry: &MemoryMapEntry) -> bool {
+    return 0;
+  }
+
+  func get_usable_memory() -> Optional<&MemoryMapEntry> {
+    index: int = 0;
+    while (index < entries.size) {
+      if (is_usable_memory(entries.get_at(index))) {
+        return new Optional<&MemoryMapEntry>(entries.get_at(index));
+      }
+
+      index = index + 1;
+    }
+
+    return new Optional<&MemoryMapEntry>();
   }
 
   mut virtual func get_memory_entry_type(entry: &MemoryMapEntry) -> &byte[] {

@@ -1,0 +1,29 @@
+class Optional<P> {
+  present: bool;
+  value: P;
+
+  new(value: P) {
+    this.present = true;
+    this.value = value;
+  }
+
+  new() {
+    this.present = false;
+  }
+
+  func get_value_unsafe() -> P {
+    return this.value;
+  }
+
+  func get_value() -> P {
+    if (!this.present) {
+      System.panic("Tried to get a value of undefined optional!");
+    }
+
+    return this.value;
+  }
+
+  func is_present() -> bool {
+    return this.present;
+  }
+}
