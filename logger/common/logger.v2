@@ -3,6 +3,7 @@
 
 interface Logger {
   virtual func log(str: String) -> void;
+  virtual func log(number: int) -> void;
 
   func log(str: &byte[], len: int) -> void {
     this.log(String.from(str, len));

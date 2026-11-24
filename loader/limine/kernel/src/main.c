@@ -51,6 +51,11 @@ extern void Paging_set_page_address_static_1(void *address) {
     );
 }
 
+//void BumpPhysicalMemoryManager_print_num_static_1(long);
+extern void BumpPhysicalMemoryManager_pointer_print_static_1(void* address) {
+  //BumpPhysicalMemoryManager_print_num_static_1((long) address) ;
+}
+
 void kmain(void) {
     if (LIMINE_BASE_REVISION_SUPPORTED(limine_base_revision) == false) {
         hcf();

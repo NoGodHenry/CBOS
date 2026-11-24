@@ -4,5 +4,38 @@
 class DirectTerminalLogger impl Logger {
   virtual func log(str: String) -> void {
     System.graphics.get_terminal().append(str);
+    System.graphics.get_terminal().new_line();
+  }
+
+  virtual func log(number: int) -> void {
+    buffer: byte[16] = new byte[16]();
+    count: int = 0;
+    value: int = number;
+
+    if (value == 0) {
+        buffer[0] = 48;
+        count = 1;
+    } else {
+        while (value > 0) {
+            digit: int = value % 10;
+            buffer[count] = digit + 48;
+            count = count + 1;
+            value = value / 10;
+        }
+    }
+
+    left: int = 0;
+    right: int = count - 1;
+
+    while (left < right) {
+        temp: byte = buffer[left];
+        buffer[left] = buffer[right];
+        buffer[right] = temp;
+        left = left + 1;
+        right = right - 1;
+    }
+
+    log(&buffer, count);
+
   }
 }

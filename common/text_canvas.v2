@@ -1,5 +1,7 @@
 #import "common/string"
+#import "font/common/font"
 
 interface TextCanvas {
   mut virtual func draw_text(x: int, y: int, str: String) -> void;
+  virtual func get_font() -> &Font;
 }

@@ -3,23 +3,32 @@
 #import "common/text_canvas"
 
 class Terminal {
-  lineCount: int;
+  line_count: int;
   canvas: &mut TextCanvas;
 
-  index: int;
+  line_index: int;
+  line_offset: int;
 
-  new(lineCount: int, canvas: &mut TextCanvas) {
-    this.lineCount = lineCount;
+  new(line_count: int, canvas: &mut TextCanvas) {
+    this.line_count = line_count;
     this.canvas = canvas;
 
-    this.index = 0;
+    this.line_index = 0;
+    this.line_offset = 0;
   }
 
   mut virtual func append(str: String) -> void {
-    canvas.draw_text(0, this.index, str);
-    this.index = this.index + 1;
-    if (this.index >= this.lineCount) {
-      this.index = 0;
+    canvas.draw_text(this.line_offset, this.line_index, str);
+
+    this.line_offset = this.line_offset + str.size;
+  }
+
+  mut virtual func new_line() -> void {
+    this.line_offset = 0;
+    this.line_index = this.line_index + 1;
+
+    if (this.line_index >= this.line_count) {
+      this.line_index = 0;
     }
   }
 }

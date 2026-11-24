@@ -2,4 +2,5 @@
 
 interface TerminalLike {
   mut virtual func append(str: String) -> void;
+  mut virtual func new_line() -> void;
 }

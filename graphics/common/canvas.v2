@@ -20,4 +20,8 @@ class Canvas impl TextCanvas {
       index = index + 1;
     }
   }
+
+  virtual func get_font() -> &Font {
+    return font;
+  }
 }
