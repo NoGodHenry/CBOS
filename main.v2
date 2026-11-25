@@ -32,7 +32,7 @@ class System {
     graphics.load();
     paging.load();
     pmm.load();
-    System.logger.log(4233662);
+
     count: int = 0;
 
     view: ArrayView<&MemoryMapEntry> = loader.get_memory_map().entries;
@@ -49,7 +49,7 @@ class System {
       count = count + 1;
     }
 
-    logger.log_null_terminated("hey");
+    logger.log_null_terminated("Test");
   }
 
   static func panic(reason: &byte[]) -> void {

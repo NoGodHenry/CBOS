@@ -1,6 +1,10 @@
 class Box<T> {
+  ptr: &mut T;
 
   new(value: T) {
+    // allocates
+    // copies from value to dest
 
+    // compiler needs to auto dereference it to as &mut T ?
   }
 }

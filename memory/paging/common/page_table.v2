@@ -11,6 +11,10 @@ class PageTable {
     }
   }
 
+  func present(index: int) -> bool {
+    return this.entries[index].present();
+  }
+
   func get_page_entry(index: int) -> &mut PageEntry {
     return &mut this.entries[index];
   }

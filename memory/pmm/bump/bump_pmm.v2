@@ -27,16 +27,16 @@ class BumpPhysicalMemoryManager impl PhysicalMemoryManager, Loadable {
   func pointer_alloc(size: long, alightment: int) -> long {
     if (index + size >= length) {
       System.panic("Out of memory!");
-      return -1;
     }
 
     index = index + size;
+
+    // TODO: Alignment
 
     return base + index;
   }
 
   virtual func alloc_aligned(size: long, alightment: int) -> &mut AllocationBlock {
-    t: AllocationBlock = new AllocationBlock();
-    return &mut t;
+    return pointer_alloc(size, alightment) as &mut AllocationBlock;
   }
 }

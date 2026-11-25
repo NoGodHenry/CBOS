@@ -3,9 +3,9 @@
 
 interface PhysicalMemoryManager {
   func alloc_page_aligned() -> &mut PageTable {
-    return (this.alloc_aligned(8, 4096)) as &mut PageTable;
+    return (this.alloc_aligned(8 as long, 4096)) as &mut PageTable;
   }
 
   // size in bytes
-  virtual func alloc_aligned(size: long, alightment: int) -> &mut AllocationBlock {
+  virtual func alloc_aligned(size: long, alightment: int) -> &mut AllocationBlock;
 }

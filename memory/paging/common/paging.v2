@@ -3,18 +3,40 @@
 #import "common/loadable"
 
 class Paging impl Loadable {
-  pml4: PageTable;
+  pml4_table: PageTable;
   index: int;
 
   mut virtual func load() -> void {
+    pml4_table = new PageTable();
+
+    //set_page_address(&pml4_table);
   }
 
   mut func map_page(physical_address: long, virtual_address: long) -> void {
-    pml4_index: long = (virtual_address >> 39) & 0x1FF;
-    pdp_index: long = (virtual_address >> 30) & 0x1FF;
-    pd_index: long = (virtual_address >> 21) & 0x1FF;
-    pt_index: long = (virtual_address >> 12) & 0x1FF;
-        
+    pml4_index: int = (virtual_address >> 39) & 0x1FF as int;
+    pdp_index: int = (virtual_address >> 30) & 0x1FF as int;
+    pd_index: int = (virtual_address >> 21) & 0x1FF as int;
+    pt_index: int = (virtual_address >> 12) & 0x1FF as int;
+
+    pdp_table: &mut PageTable = get_page_table(&mut pml4_table, pml4_index);
+    pd_table: &mut PageTable = get_page_table(pdp_table, pdp_index);
+    pt_table: &mut PageTable = get_page_table(pd_table, pd_index);
+
+    flush_paging();
+  }
+
+  static func get_page_table(table: &mut PageTable, index: int) -> &mut PageTable {
+    if (!table.present(index)) {
+      base_table: &mut PageTable = System.pmm.alloc_page_aligned();
+
+      table.get_page_entry(index).physical_address(
+          base_table as long
+      );
+
+      return base_table;
+    }
+
+    return table.get_page_entry(index).physical_address() as &mut PageTable;
   }
 
   static native func set_page_address(pointer: &PageTable) -> void;

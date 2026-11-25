@@ -36,6 +36,5 @@ class DirectTerminalLogger impl Logger {
     }
 
     log(&buffer, count);
-
   }
 }
