@@ -51,6 +51,11 @@ extern void Paging_set_page_address_static_1(void *address) {
     );
 }
 
+extern void Paging_flush_paging_static_1(void *page) {
+	__asm__ volatile ("invlpg (%0)" :: "r" (page) : "memory");
+}
+
+
 //void BumpPhysicalMemoryManager_print_num_static_1(long);
 extern void BumpPhysicalMemoryManager_pointer_print_static_1(void* address) {
   //BumpPhysicalMemoryManager_print_num_static_1((long) address) ;

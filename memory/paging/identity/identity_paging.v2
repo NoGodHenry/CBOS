@@ -1,0 +1,7 @@
+#import "memory/paging/paging"
+
+class IdentityPaging extends Paging {
+  mut virtual func load() -> void {
+    set_page_address(&pml4_table);
+  }
+}

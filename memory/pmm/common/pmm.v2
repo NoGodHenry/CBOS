@@ -1,5 +1,6 @@
 #import "memory/paging/common/page_table"
 #import "memory/pmm/common/allocation_block"
+#import "main"
 
 interface PhysicalMemoryManager {
   func alloc_page_aligned() -> &mut PageTable {

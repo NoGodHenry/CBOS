@@ -22,6 +22,7 @@ class BumpPhysicalMemoryManager impl PhysicalMemoryManager, Loadable {
 
     this.base = usableMemory.get_value_unsafe().base;
     this.length = usableMemory.get_value_unsafe().length;
+    this.index = base;
   }
 
   func pointer_alloc(size: long, alightment: int) -> long {
@@ -29,11 +30,9 @@ class BumpPhysicalMemoryManager impl PhysicalMemoryManager, Loadable {
       System.panic("Out of memory!");
     }
 
-    index = index + size;
+    index = (index + size + (alightment - 1)) & ~(alightment - 1);
 
-    // TODO: Alignment
-
-    return base + index;
+    return index;
   }
 
   virtual func alloc_aligned(size: long, alightment: int) -> &mut AllocationBlock {
